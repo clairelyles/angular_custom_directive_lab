@@ -1,0 +1,40 @@
+body {
+  /*background-color: blue;*/
+}
+
+.btn-animated {
+  width: 100px;
+  height: 34px;
+  transition: font-size 2s, width 2s ease, height 2s ease, background-color 2s;
+}
+
+.btn-animated:hover {
+  width: 250px;
+  height: 88px;
+  font-size: 40px;
+  background-color: red;
+}
+
+
+.todo-anim {
+
+}
+/* adding element to page */
+.todo-anim.ng-enter {
+  -webkit-animation-name: rollIn;
+  animation-name: rollIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* removing element to page */
+.todo-anim.ng-leave {
+  -webkit-animation-name: fadeOutLeftBig;
+  animation-name: fadeOutLeftBig;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+}

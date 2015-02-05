@@ -3,25 +3,28 @@ angular.module('current-weather', [])
     console.log('weather directive loading')
     return {
         restrict: 'E',
+
         scope: {
             location: '@'
         },
         controller: ['$scope','$http','$element', function($scope,$http,$element){
-
-            var req = {
-                url: "http://api.openweathermap.org/data/2.5/weather",
-                params: {
-                    q: $scope.location,
+            $scope.wTemp=false;
+            $scope.$watch('location',function(){
+                if(!$scope.location) return;
+                var req = {
+                    url: "http://api.openweathermap.org/data/2.5/weather",
+                    params: { // builds the URL for us
+                        q: $scope.location,
+                    }
                 }
-            }
 
-            $http(req).success(function(data) {
-                $scope.name = $scope.location
-                $scope.temp = Math.floor((((data.main.temp)-273.15) * 1.8000) + 32)
-                $scope.desc = data.weather[0].main.toLowerCase()
+                $http(req).success(function(data) {
+                    $scope.temp = Math.floor((((data.main.temp)-273.15) * 1.8000) + 32)
+                    $scope.desc = data.weather[0].main.toLowerCase()
+                })
             })
         }],
         replace: true,
-        template: '<div>The weather in {{name}} is {{temp}}&deg; with {{desc}}</div>'
+        template: '<div class="well"><span ng-hide="wTemp"></span><span ng-show="wTemp"></span>The weather in {{location}} is {{temp}}&deg;F with {{desc}}</div>'
     }
 })

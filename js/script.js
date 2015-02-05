@@ -12,6 +12,7 @@ todoApp.controller('TodoList',['$scope',function($scope){
   $scope.items.push({done:false,name:"go running"});
   $scope.items.push({done:false,name:"do dishes"});
   $scope.items.push({done:false,name:"eat salad"});
+  $scope.weatherCities = [];
   $scope.newItem = '';
   console.log($scope.items);
 

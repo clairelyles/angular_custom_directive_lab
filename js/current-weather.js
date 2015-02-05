@@ -5,7 +5,7 @@ angular.module('current-weather', [])
         restrict: 'E',
 
         scope: {
-            location: '@'
+            location: '@?'
         },
         controller: ['$scope','$http','$element', function($scope,$http,$element){
             $scope.wTemp=false;
@@ -15,6 +15,7 @@ angular.module('current-weather', [])
                     url: "http://api.openweathermap.org/data/2.5/weather",
                     params: { // builds the URL for us
                         q: $scope.location,
+                        units: 'imperial'
                     }
                 }
 
@@ -23,6 +24,18 @@ angular.module('current-weather', [])
                     $scope.desc = data.weather[0].main.toLowerCase()
                 })
             })
+
+            if(!$scope.location){
+                if(navigator.geolocation){
+                    // browser supports GPS, now find it!
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        console.log('position: ', position);
+                    });
+                } else {
+                    //do something for people without GPS
+                }
+            }
+
         }],
         replace: true,
         template: '<div class="well"><span ng-hide="wTemp"></span><span ng-show="wTemp"></span>The weather in {{location}} is {{temp}}&deg;F with {{desc}}</div>'

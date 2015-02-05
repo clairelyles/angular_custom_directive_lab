@@ -23,6 +23,9 @@
         <input type='text' ng-model='enteredCity'>
         <button class="btn btn-primary" ng-click='weatherCities.push(enteredCity)'>Get Weather</button>
         <hr>
+        <h3>Your Location</h3>
+        <weather></weather>
+        <hr>
         <h3>To Do List</h3>
         <input type='text' ng-model='newItem'>
         <button class='btn btn-primary' ng-disabled='newItem.length < 1' ng-click='addItem()'>Add Item</button>
